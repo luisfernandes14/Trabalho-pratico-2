@@ -3,6 +3,7 @@ import argparse
 import cv2
 import numpy as np
 from colorama import Fore,Back,Style
+from datetime import datetime
 
 # Definition of onTrackBar function responsible for segmenting pixels
 # in a given for R, G and B
@@ -127,7 +128,14 @@ def main():
         if k == 99: #c is pressed, "tela" is refereshed
             cv2.imshow('Painting Picture', tela)
             tela.fill(255)                      #repintar a tela toda de branco
-            
+        if k == 119: # clicando no W, faz um save da imagem da tela e guarda num ficheiro png
+            momento = datetime.now()
+            data_hora = momento.strftime("%a_%b_%d_%H:%M:%S_%Y")
+            ficheiro_save = f"painting_{data_hora}.png"
+            cv2.imwrite(ficheiro_save, tela)
+            print(f"Image saved as {ficheiro_save}")
+
+
 
 
         
