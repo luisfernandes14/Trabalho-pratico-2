@@ -135,11 +135,11 @@ def main():
             print("Eraser mode selected")
         elif k == 43:
             drawing_data["thickness"] += 1
-            print("Incresing pencil thickness...")
+            print("Incresing pencil thickness to ",drawing_data['thickness'])
         elif k == 45:
             if drawing_data["thickness"] >= 2:
                 drawing_data["thickness"] -= 1
-                print("Decreasing pencil thickness...")   
+                print("Decreasing pencil thickness to ",drawing_data['thickness'])  
         elif k == 99:
             tela = np.ones((size[1], size[0], 3), dtype = np.uint8)
             tela = 255*tela
