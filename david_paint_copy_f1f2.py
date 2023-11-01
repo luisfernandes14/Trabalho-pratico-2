@@ -134,16 +134,26 @@ def main():
                 drawing_data["thickness"] -= 1
                 print("Decreasing pencil thickness to ",drawing_data['thickness'])   
         elif k == 99:
-            tela = np.ones((size[1], size[0], 3), dtype = np.uint8)
-            tela = 255*tela
-            print("Clearing canva!")  ######################para funcionalidade 2
+            if args["video_draw"]:
+                black_tela = np.zeros((size[1], size[0], 3), dtype = np.uint8)
+                print("Clearing canva!")
+            else:
+                tela = np.ones((size[1], size[0], 3), dtype = np.uint8)
+                tela = 255*tela
+                print("Clearing canva!")
         elif k == 119:
             data = time.asctime( time.localtime(time.time()))
             data = data.replace(" ", "_")
 
-            filename = 'drawing_' + data + '.png'
-            cv2.imwrite(filename, tela)
-            print(f"Image saved as {filename}")
+            if args["video_draw"]:
+                filename = 'drawing_' + data + '.png'
+                cv2.imwrite(filename, black_tela)
+                print(f"Image saved as {filename}")
+
+            else:
+                filename = 'drawing_' + data + '.png'
+                cv2.imwrite(filename, tela)
+                print(f"Image saved as {filename}")
 
         if ret == True:
 
