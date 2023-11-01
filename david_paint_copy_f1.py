@@ -134,7 +134,7 @@ def main():
         elif k == 99:
             tela = np.ones((size[1], size[0], 3), dtype = np.uint8)
             tela = 255*tela
-            print("Clearing canva!")
+            print("Clearing canva!") 
         elif k == 119:
             data = time.asctime( time.localtime(time.time()))
             data = data.replace(" ", "_")
@@ -185,28 +185,38 @@ def main():
                                    markerType= cv2.MARKER_TILTED_CROSS, line_type=cv2.LINE_AA,
                                    markerSize=25)
 
-                    if j == 0:
-                        drawing_data['previous_x'] = x
-                        drawing_data['previous_y'] = y
 
-                    else:
-                        if args["use_shake_prevention"]:
-                            distance = calculate_distance(x, y, drawing_data['previous_x'], drawing_data['previous_y'])
-                            tolerable_distance = 100
-                            if distance <= tolerable_distance:
-                                drawing_data['thickness'] = drawing_data['thickness']
-                                drawing_data['pencil_on'] = True
-                                drawing_data['color'] = drawing_data['color']
-                                pencil(tela, drawing_data, x, y)
-
+                    if args['use_shake_prevention']:
+                        if j == 0:
                             drawing_data['previous_x'] = x
                             drawing_data['previous_y'] = y
+
+                        else:
+                                distance = calculate_distance(x, y, drawing_data['previous_x'], drawing_data['previous_y'])
+                                tolerable_distance = 100
+                                if distance <= tolerable_distance:
+                                    drawing_data['thickness'] = drawing_data['thickness']
+                                    drawing_data['pencil_on'] = True
+                                    drawing_data['color'] = drawing_data['color']
+                                    pencil(tela, drawing_data, x, y)
+
+                                drawing_data['previous_x'] = x
+                                drawing_data['previous_y'] = y
+                    else:
+                        if j == 0:
+                            drawing_data['previous_x'] = x
+                            drawing_data['previous_y'] = y
+
                         else:
                             drawing_data['thickness'] = drawing_data['thickness']
                             drawing_data['pencil_on'] = True
                             drawing_data['color'] = drawing_data['color']
+
                             pencil(tela, drawing_data, x, y)
-                                            
+
+                            drawing_data['previous_x'] = x
+                            drawing_data['previous_y'] = y
+                                                    
                     j = 1
 
 
