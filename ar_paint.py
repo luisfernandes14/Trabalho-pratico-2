@@ -32,19 +32,21 @@ def segmented(img, min_B, min_G, min_R, max_B, max_G, max_R):
     Segm = cv2.inRange(img, lower, upper)
 
     return Segm
-
+#Function that draws on the selected image 
 def pencil(img, drawing_data, x, y):
 
     if drawing_data['pencil_on'] == True:
         cv2.line(img, (drawing_data['previous_x'], drawing_data['previous_y']), (x,y), drawing_data['color'], drawing_data['thickness']) 
-
+#Function that calculates distance, in order to use -usp
 def calculate_distance(x1,y1,x2,y2):
     return ((x1 - x2) ** 2 + (y1 - y2) ** 2) ** 0.5
 
 
 def main():
 
-    #### Initialization ####
+    # -----------------------------------------------
+    # Inicialization 
+    # -----------------------------------------------
     parser = argparse.ArgumentParser(description='Definition of test mode')
     parser.add_argument('-j', '--json', type=str, help='Full path to json file', required=False, 
                         default='limits.json')
@@ -56,7 +58,9 @@ def main():
     parser.add_argument('-np', '--numered_paint', help="Mode where you must paint according to the numbers", required=False, default='limits.json',action='store_true')
     args = vars(parser.parse_args()) # creates a dictionary
 
-    #### Dictionaries  ###
+    # -----------------------------------------------
+    # Dictionaries
+    # -----------------------------------------------
     drawing_data = {'pencil_on': False, 'previous_x': 0, 'previous_y': 0, 'color': (0,0,0), 'thickness' : 2}
     with open(args['json'], "r") as json_file:
         limit_data = json.load(json_file)
@@ -220,7 +224,7 @@ def main():
         mirror_frame= cv2.flip(frame,1)
 
         
-        # Commands
+        # Commands form keyboard
         k = cv2.waitKey(1) & 0xFF
         if k == 113:                              
             print("q key pressed, exiting...")
@@ -538,7 +542,7 @@ def main():
                 frame[0:rows, 0:cols ] = dst
                 saved_f = frame.copy()
 
-
+            
             if args["use_mirror_mode"]:
                 cv2.imshow('Principal window', mirror_frame)
                 cv2.imshow('Segmented Window', mirror_segm)
