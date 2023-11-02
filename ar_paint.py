@@ -109,6 +109,9 @@ def main():
     # painting board creation
     
     size = (1000, 600)
+    # -----------------------------------------------
+    # Execution 
+    # -----------------------------------------------
 
     # Board for mode numered paint 
     if args['numered_paint'] is True:
@@ -541,8 +544,12 @@ def main():
                 dst = cv2.add(img1_bg,img2_fg)
                 frame[0:rows, 0:cols ] = dst
                 saved_f = frame.copy()
-
             
+            # -----------------------------------------------
+            # Visualization 
+            # -----------------------------------------------
+
+
             if args["use_mirror_mode"]:
                 cv2.imshow('Principal window', mirror_frame)
                 cv2.imshow('Segmented Window', mirror_segm)
@@ -565,6 +572,10 @@ def main():
 
                 # showing painting board
                 cv2.imshow('Object', output)
+
+    # -----------------------------------------------
+    # Termination 
+    # -----------------------------------------------
         
     # close all windows
     cv2.destroyAllWindows()
