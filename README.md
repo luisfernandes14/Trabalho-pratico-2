@@ -1,2 +1,4 @@
 # Trabalho-pratico-2
-Rascunhos para o trabalho
+Trabalho realizado por: David Ferreira / Henrique Fonseca / Luís Fernandes
+
+
