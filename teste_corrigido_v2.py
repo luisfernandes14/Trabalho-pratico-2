@@ -243,6 +243,9 @@ def main():
         elif k == 101:
             drawing_data["color"] = (255,255,255)
             print("Eraser mode selected")
+	elif k == 102:
+            tela[:, :] = drawing_data["color"] 
+	    print("Full color used")
         elif k == 43:
             drawing_data["thickness"] += 1
             print("Incresing pencil thickness to ",drawing_data['thickness'])
